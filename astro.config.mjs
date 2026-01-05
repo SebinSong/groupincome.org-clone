@@ -46,8 +46,8 @@ const siteMap = {
 // https://vite.dev/config/
 
 export default defineConfig({
-  site: 'https://sebinsong.github.io',
-  base: '/groupincome.org-clone/',
+  site: 'https://groupincome-org-clone.onrender.com/',
+  base: '/',
   // Sass-related options
   css: {
     preprocessorOptions: {
