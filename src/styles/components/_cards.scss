@@ -1,0 +1,41 @@
+@use "../variables" as *;
+
+.card {
+  padding: 1.5rem 1rem;
+  background-color: $background_0;
+  border-radius: 0.625rem; // 10px
+  box-shadow: 0 0 20px rgba(219, 219, 219, 0.6); // $general_0
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 4rem;
+  }
+
+  @include tablet {
+    padding: 1.5rem;
+  }
+
+  @include desktop {
+    padding: 2.5rem;
+  }
+}
+
+.is-dark-theme .card {
+  box-shadow: none;
+}
+
+.card-header {
+  margin-bottom: 0.5rem;
+}
+
+.cardBox {
+  position: relative;
+  border: 1px solid $general_0;
+  padding: 1.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+
+  &.isActive {
+    border-color: $primary_0;
+  }
+}

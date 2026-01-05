@@ -1,0 +1,170 @@
+@use "./variables" as *;
+
+:root {
+  // toolbar-height is needed in various places in defining layouts.
+  --gi-header-height: #{$headerHeightMobile};
+
+  @include tablet {
+    --gi-header-height: #{$headerHeightTablet};
+  }
+
+  @include desktop {
+    --gi-header-height: #{$headerHeight};
+  }
+}
+
+.is-unstyled {
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+  min-height: auto;
+  color: inherit;
+  text-align: inherit;
+  padding: 0;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    border: none;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.is-display-block {
+  display: block;
+}
+
+// Screen reader only
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Global Classes for SVG fills
+$fills: (
+  primary: $primary_0,
+  blank: $background,
+  success: $success_0,
+  warning: $warning_0,
+);
+
+@each $class, $color in $fills {
+  .u-has-fill-#{$class} {
+    fill: $color;
+  }
+}
+
+.hide-desktop {
+  @include desktop {
+    display: none !important;
+  }
+}
+
+.hide-touch {
+  @include touch {
+    display: none !important;
+  }
+}
+
+.hide-phone {
+  @include phone {
+    display: none !important;
+  }
+}
+
+.hide-tablet {
+  @include tablet {
+    display: none;
+  }
+}
+
+.indented-list {
+  margin: 1rem 0 1.5rem 0;
+
+  li {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    margin-left: 1.5rem;
+
+    @include phone {
+      margin-left: 1rem;
+    }
+  }
+
+  &.less-item-gap {
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+}
+
+ul.indented-list {
+  list-style-type: disc;
+}
+
+.has-scroll-margin-top {
+  // When scrolling to a particular element via anchor tag, the target scroll-position needs to
+  // take into account the top-header UI that is floating on top of the page content.
+  // reference: https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+  scroll-margin-top: calc(var(--gi-header-height) + 50px);
+}
+
+// color-related util classes (refer to _colors.scss for details)
+
+.text-orange {
+  color: $orange;
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-green {
+  color: $green;
+}
+
+.bg-orange {
+  background-color: $orange;
+}
+
+.bg-blue {
+  background-color: $blue;
+}
+
+.bg-green {
+  background-color: $green;
+}
+
+.has-deep-box-shadow {
+  box-shadow: $drop-shadow_deep;
+}
+
+.has-shallow-box-shadow {
+  box-shadow: $drop-shadow_shallow;
+}
+
+.bullet-list {
+  display: block;
+  list-style: disc;
+  padding-left: 20px;
+  margin-top: 20px;
+
+  li:not(:last-child) {
+    margin-bottom: 6px;
+  }
+}

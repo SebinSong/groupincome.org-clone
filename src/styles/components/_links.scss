@@ -1,0 +1,6 @@
+@use "../mixins" as *;
+
+.is-link,
+.link {
+  @extend %link-style;
+}

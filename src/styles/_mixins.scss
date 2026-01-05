@@ -1,0 +1,285 @@
+@use "./colors" as *;
+@use "./font_variables" as *;
+
+// Breakpoints
+$gap: 1rem;
+$tablet: 769px;
+$desktop: 1200px;
+
+$maxDesktop: 1180px;
+
+
+@mixin fa($size, $dimensions) {
+  display: inline-block;
+  font-size: $size;
+  height: $dimensions;
+  line-height: $dimensions;
+  text-align: center;
+  vertical-align: top;
+  width: $dimensions;
+}
+
+@mixin overflow-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin from($device) {
+  @media screen and (min-width: $device) {
+    @content;
+  }
+}
+
+@mixin until($device) {
+  @media screen and (max-width: $device - 1px) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media screen and (max-width: 769px - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: 769px), print {
+    @content;
+  }
+}
+
+@mixin touch {
+  @media screen and (max-width: 1200px - 1px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin tall {
+  @media screen and (min-height: 1000px) {
+    @content;
+  }
+}
+
+@mixin page-wrapper-common {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: $maxDesktop;
+  margin: 0 auto;
+
+  padding: 2rem 1rem;
+
+  @include tablet {
+    padding: 4rem 1rem;
+  }
+
+  @include desktop {
+    padding: 6rem 1rem;
+  }
+}
+
+@mixin is-locale($locale) {
+  body[data-translation="#{$locale}"] {
+    @content;
+  }
+}
+
+%unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+%overlay {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+%reset-button {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  min-height: auto;
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+%floating-panel {
+  @include phone {
+    top: auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  @include phone {
+    padding-bottom: 4rem;
+  }
+
+  @include tablet {
+    position: fixed;
+    top: 4.25rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  @include desktop {
+    top: 2.3rem;
+    position: absolute;
+    right: auto;
+    transform: none;
+  }
+}
+
+%floating-panel-item {
+  height: 2.31rem;
+
+  @include touch {
+    height: 3.43rem;
+  }
+}
+
+%link-style {
+  --link-color: #{$primary_0};
+
+  font-size: $size_extra_small;
+  color: var(--link-color);
+  background: linear-gradient(to right, rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)),
+              linear-gradient(to right, var(--link-color), var(--link-color));
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 0.1em, 100% 0.1em;
+  transition: color 200ms;
+
+  &:hover,
+  &:focus {
+    --link-color: #{$green};
+    animation: link-hover-ani 300ms linear forwards;
+    outline: none;
+  }
+
+  &.is-display-block {
+    width: max-content;
+  }
+}
+
+@mixin link-style {
+  --link-color: #{$primary_0};
+
+  font-size: $size_extra_small;
+  color: var(--link-color);
+  background: linear-gradient(to right, rgba(256, 256, 256, 0), rgba(256, 256, 256, 0)),
+              linear-gradient(to right, var(--link-color), var(--link-color));
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 0.1em, 100% 0.1em;
+  transition: color 200ms;
+
+  &:hover,
+  &:focus {
+    --link-color: #{$green};
+    animation: link-hover-ani 300ms linear forwards;
+    outline: none;
+  }
+
+  &.is-display-block {
+    width: max-content;
+  }
+}
+
+// Spacing-related mixins
+
+@mixin removeSideCardPadding {
+  width: calc(100% + 2rem);
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+
+  @include tablet {
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  @include desktop {
+    width: calc(100% + 5rem);
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+  }
+}
+
+@mixin removeTopCardPadding {
+  margin-top: -1.5rem;
+
+  @include tablet {
+    margin-top: -1.5rem;
+  }
+
+  @include desktop {
+    margin-top: -2.5rem;
+  }
+}
+
+@mixin removeSideCardPadding {
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-right: -1rem;
+
+  @include tablet {
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  @include desktop {
+    width: calc(100% + 5rem);
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+  }
+}
+
+@mixin removeTopCardPadding {
+  margin-top: -1.5rem;
+
+  @include tablet {
+    margin-top: -1.5rem;
+  }
+
+  @include desktop {
+    margin-top: -2.5rem;
+  }
+}
