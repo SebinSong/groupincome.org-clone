@@ -11,6 +11,7 @@
     "build:prod": "BUILD_TARGET=production astro build",
     "preview:prod": "BUILD_TARGET=production astro preview",
     "prepare-translation": "node prepare-translation.js",
+    "deploy": "npm run build && gh-pages -d dist",
     "astro": "astro"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "@remark-embedder/transformer-oembed": "^5.0.1",
     "astro": "^5.10.1",
     "dotenv": "^17.2.3",
+    "gh-pages": "^6.3.0",
     "rehype-katex": "^7.0.1",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.1",
